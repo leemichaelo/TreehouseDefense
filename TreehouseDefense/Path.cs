@@ -13,5 +13,10 @@ namespace TreehouseDefense
         }
 
         public bool IsOnPath(MapLocation mapLocation) => _path.Contains(mapLocation);
+
+        public MapLocation GetLocationAt(int pathStep)
+        {
+            return (pathStep < _path.Length) ? _path[pathStep] : null;
+        }
     }
 }

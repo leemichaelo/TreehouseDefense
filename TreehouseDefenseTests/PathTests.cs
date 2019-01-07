@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Linq;
 
 namespace TreehouseDefense.Tests
 {
@@ -27,7 +28,6 @@ namespace TreehouseDefense.Tests
         public void Map_Location_Is_On_Path()
         {
             var target = _path3;
-
             Assert.IsTrue(target.IsOnPath(new MapLocation(0, 1, _map3x3)));
         }
 
@@ -37,6 +37,34 @@ namespace TreehouseDefense.Tests
             var target = _path3;
 
             Assert.IsFalse(target.IsOnPath(new MapLocation(0, 0, _map3x3)));
+        }
+
+        [TestMethod()]
+        public void GetLocationAtBeginningOfPath()
+        {
+            var target = _path3;
+            Assert.AreEqual(_pathLocations3.First(), target.GetLocationAt(0));
+        }
+
+        [TestMethod()]
+        public void GetLocationAtEndOfPath()
+        {
+            var target = _path3;
+            Assert.AreEqual(_pathLocations3.Last(), target.GetLocationAt(_pathLocations3.Length - 1));
+        }
+
+        [TestMethod()]
+        public void GetLocationNotOnPath()
+        {
+            var target = _path3;
+            Assert.IsNull(target.GetLocationAt(_pathLocations3.Length + 1));
+        }
+
+        [TestMethod()]
+        public void GetLocationAtOneStepAfterEndOfPath()
+        {
+            var target = _path3;
+            Assert.IsNull(target.GetLocationAt(_pathLocations3.Length));
         }
     }
 }
